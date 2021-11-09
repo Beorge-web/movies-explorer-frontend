@@ -1,0 +1,77 @@
+.portfolio {
+	padding-bottom: 125px;
+}
+.portfolio__header {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 20px;
+	color: #8b8b8b;
+	mix-blend-mode: normal;
+	margin-top: 0;
+	margin-bottom: 50px;
+}
+.portfolio__site {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: solid 1px #424242;
+	text-decoration: none;
+	margin-top: 20px;
+}
+.portfolio__site:last-of-type {
+	border: none;
+}
+.portfolio__site:hover {
+	opacity: 0.6;
+}
+.portfolio__link {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 50px;
+	letter-spacing: -0.04em;
+	color: #ffffff;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+.portfolio__arr {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 60px;
+	letter-spacing: -0.04em;
+	color: #ffffff;
+	margin-top: 0;
+	margin-bottom: 0;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+	.portfolio {
+		padding-bottom: 90px;
+	}
+	.portfolio__link {
+		font-size: 28px;
+	}
+}
+@media screen and (max-width: 720px) {
+	.portfolio {
+		padding-bottom: 70px;
+	}
+	.portfolio__header {
+		font-size: 14px;
+		line-height: 20px;
+	}
+	.portfolio__link {
+		font-size: 18px;
+		line-height: 28px;
+	}
+	.student__arr {
+		font-size: 18px;
+		line-height: 28px;
+	}
+}
