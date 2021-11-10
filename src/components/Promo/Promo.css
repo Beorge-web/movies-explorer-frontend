@@ -1,0 +1,112 @@
+.promo {
+	background-color: #073042;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 75px;
+	padding-bottom: 50px;
+}
+.promo__text {
+	width: 640px;
+}
+.promo__text span {
+	white-space: nowrap;
+}
+.promo__title {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 50px;
+	line-height: 58px;
+	color: #ffffff;
+	margin-top: 0;
+	margin-bottom: 36px;
+}
+.promo__subtitle {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 16px;
+	color: #ffffff;
+	mix-blend-mode: normal;
+	opacity: 0.5;
+	width: 310px;
+	margin-bottom: 156px;
+}
+.promo__logo {
+	width: 310px;
+	height: 304px;
+}
+.promo__more {
+	height: 36px;
+	font-family: Inter;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	color: #ffffff;
+	background-color: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.6);
+	box-sizing: border-box;
+	border-radius: 3px;
+	margin-bottom: 25px;
+	padding: 10px 20px;
+	cursor: pointer;
+	width: 130px;
+	text-align: center;
+	white-space: nowrap;
+	text-decoration: none;
+}
+.promo__more:hover {
+	opacity: 0.9;
+	-webkit-box-shadow: 2px 2px 2px 1px rgba(171, 168, 199, 0.5);
+	-moz-box-shadow: 2px 2px 2px 1px rgba(171, 168, 199, 0.5);
+	box-shadow: 2px 2px 2px 1px rgba(171, 168, 199, 0.5);
+}
+@media screen and (max-width: 1000px) {
+	.promo {
+		flex-direction: column-reverse;
+		justify-content: center;
+		align-items: center;
+		padding-bottom: 75px;
+	}
+	.promo__title {
+		margin-top: 48px;
+		margin-bottom: 22px;
+		font-size: 40px;
+		line-height: 50px;
+		text-align: center;
+	}
+	.promo__subtitle {
+		text-align: center;
+		margin: 0 auto 92px;
+	}
+	.promo__more {
+		display: flex;
+		margin: 0 auto 0;
+	}
+}
+@media screen and (max-width: 720px) {
+	.promo {
+		padding-top: 70px;
+		padding-bottom: 30px;
+	}
+	.promo__logo {
+		width: 210px;
+		height: 206px;
+	}
+	.promo__text {
+		width: 300px;
+	}
+	.promo__title {
+		font-size: 30px;
+		line-height: 38px;
+		margin-top: 44px;
+		margin-bottom: 24px;
+		letter-spacing: -0.04em;
+	}
+	.promo__subtitle {
+		margin-bottom: 80px;
+		width: 260px;
+	}
+}

@@ -1,0 +1,132 @@
+.card-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.card-list__cards {
+	display: grid;
+	gap: 38px 20px;
+	grid-template-columns: repeat(4, 270px);
+	justify-content: center;
+}
+.card-list__item {
+	display: flex;
+	flex-direction: column;
+}
+.card-list__photo {
+	height: 151px;
+	background-image: url(../../images/card-pic.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.card-list__text-box {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+.card-list__text {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #ffffff;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.card-list__like {
+	border: none;
+	width: 24px;
+	height: 24px;
+	border-radius: 36px;
+	background-color: #313131;
+	cursor: pointer;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.card-list__remove {
+	border: none;
+	width: 24px;
+	height: 24px;
+	border-radius: 36px;
+	background-color: #313131;
+	cursor: pointer;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding-bottom: 4px;
+	opacity: 0;
+}
+.card-list__remove:hover {
+	opacity: 1;
+}
+.card-list__line {
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #424242;
+	margin: 0;
+}
+.card-list__dutarion {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 11px;
+	line-height: 13px;
+	display: flex;
+	align-items: flex-start;
+	color: #8b8b8b;
+	margin-top: 6px;
+	margin-bottom: 0;
+}
+.card-list__more {
+	background-color: transparent;
+	font-family: Inter;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: #ffffff;
+	width: 320px;
+	height: 36px;
+	margin: 50px auto 80px;
+	border: 1px solid #424242;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 1180px) {
+	.card-list__cards {
+		grid-template-columns: repeat(2, 339px);
+	}
+	.card-list__photo {
+		height: 190px;
+	}
+	.card-list {
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+}
+@media screen and (max-width: 720px) {
+	.card-list__cards {
+		grid-template-columns: 300px;
+	}
+	.card-list__text {
+		line-height: 15px;
+	}
+	.card-list__text-box {
+		margin-bottom: 30px;
+	}
+	.card-list {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.card-list__more {
+		width: 240px;
+	}
+}
