@@ -1,36 +1,21 @@
 import MovieCard from '../MovieCard/MovieCard';
-import { Switch, Route } from 'react-router-dom';
-
-function MoviesCardList() {
+import React from 'react';
+function MoviesCardList({ filteredMovies, currentCards, onLike, onClick }) {
 	return (
-		<Switch>
-			<div className='card-list root__section'>
-				<div className='card-list__cards'>
-					<Route path='/movies'>
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-					</Route>
-					<Route path='/saved-movies'>
-						<MovieCard />
-						<MovieCard />
-						<MovieCard />
-					</Route>
-				</div>
-				<button type='button' className='card-list__more'>
+		<div className='card-list root__section'>
+			<div className='card-list__cards'>
+				{Object.keys(filteredMovies).length >= 1
+					? filteredMovies.slice(0, currentCards).map((movie) => {
+							return <MovieCard movie={movie} key={movie.id} onLike={onLike} />;
+					  })
+					: ''}
+			</div>
+			{Object.keys(filteredMovies).length > currentCards ? (
+				<button type='button' className='card-list__more' onClick={onClick}>
 					Еще
 				</button>
-			</div>
-		</Switch>
+			) : null}
+		</div>
 	);
 }
 export default MoviesCardList;

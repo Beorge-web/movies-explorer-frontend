@@ -4,9 +4,13 @@
 }
 .card-list__photo {
 	height: 151px;
-	background-image: url(../../images/card-pic.png);
 	background-size: contain;
 	background-repeat: no-repeat;
+	border: none;
+	padding: 0;
+	background-color: transparent;
+	background-position: center;
+	cursor: pointer;
 }
 .card-list__text-box {
 	display: flex;
