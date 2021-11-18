@@ -101,19 +101,13 @@ class Api {
 		return res.json();
 	}
 }
+
 const apiData = {
-	url: 'http://localhost:4000',
+	url: 'https://api.beorge-movies.nomoredomains.monster',
 	credentials: 'include',
 	headers: {
 		'Content-Type': 'application/json',
 	},
 };
-// const apiData = {
-// 	url: 'https://api.beorge-movies.nomoredomains.monster',
-// 	credentials: 'include',
-// 	headers: {
-// 		'Content-Type': 'application/json',
-// 	},
-// };
 const MainApi = new Api(apiData);
 export default MainApi;
