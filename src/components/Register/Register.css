@@ -23,6 +23,12 @@
 	background-color: #2f2f2f;
 	border-radius: 8px;
 	padding: 15px;
+	font-family: Inter;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 16px;
+	color: #ffffff;
 }
 .auth__input-error {
 	font-family: Inter;
@@ -35,7 +41,6 @@
 	color: #ee3465;
 	margin-top: 3px;
 	margin-bottom: 7px;
-
 }
 .auth__input-error_active {
 	opacity: 1;

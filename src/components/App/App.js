@@ -30,7 +30,7 @@ function App() {
 		if (['/', '/movies', '/saved-movies', '/profile'].includes(path.pathname)) {
 			tokenCheck();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	React.useEffect(() => {
 		getMyMovies();
@@ -131,10 +131,11 @@ function App() {
 		setLoggedIn(false);
 	}
 	function handleSearchClick(item, slider) {
+		setIsLoading(true);
 		if (!localStorage.getItem('movies')) {
 			getMovies();
 		}
-		searchMovies(item, slider);
+		setTimeout(searchMovies, 1000, item, slider);
 	}
 	function handleSavedSearchClick(item, slider) {
 		searchSavedMovies(item, slider);
