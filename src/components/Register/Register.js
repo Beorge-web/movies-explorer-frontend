@@ -22,12 +22,20 @@ function Register(props) {
 				</div>
 				<div className='auth__field'>
 					<label className='auth__label'>E-mail</label>
-					<input type='email' className='auth__input' name='email' value={values.email || ''} onChange={handleChange} minLength='4' />
+					<input type='email' className='auth__input' name='email' value={values.email || ''} onChange={handleChange} minLength='4' required />
 					<span className={errors.email === '' ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{errors.email}</span>
 				</div>
 				<div className='auth__field'>
 					<label className='auth__label'>Пароль</label>
-					<input type='password' className='auth__input' name='password' value={values.password || ''} onChange={handleChange} minLength='8' />
+					<input
+						type='password'
+						className='auth__input'
+						name='password'
+						value={values.password || ''}
+						onChange={handleChange}
+						minLength='8'
+						required
+					/>
 					<span className={errors.password === '' ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{errors.password}</span>
 				</div>
 				<button type='submit' className='auth__button' disabled={isValid ? false : true}>
