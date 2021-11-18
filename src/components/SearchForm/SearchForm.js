@@ -8,6 +8,7 @@ function SearchForm(props) {
 	const [sliderStatus, setSliderStatus] = React.useState(false);
 	React.useEffect(() => {
 		setSearchInput('');
+		console.log('???');
 	}, [path.pathname]);
 	function handleSearchInput(event) {
 		setSearchInput(event.target.value);

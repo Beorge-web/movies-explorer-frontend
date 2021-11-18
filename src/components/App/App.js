@@ -37,6 +37,7 @@ function App() {
 		setFilteredSavedMovies({});
 		setAuthError('');
 		setSerchStatus(false);
+		setNoResults(false);
 	}, [path.pathname]);
 	function searchMovies(input, slider) {
 		setIsLoading(true);
