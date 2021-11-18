@@ -18,7 +18,6 @@ function MovieCard({ movie, onLike, onRemove }) {
 
 	function handleLikeClick() {
 		onLike(isCardLiked, movie);
-		console.log(isCardLiked);
 	}
 	const cardLikeSvg = isCardLiked && movie.liked === true ? likeActive : like;
 	function handleCardClick() {

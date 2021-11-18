@@ -11,7 +11,6 @@ function Register(props) {
 		event.preventDefault();
 		props.onUpdate(values);
 	}
-	console.log(values);
 	return (
 		<div className='auth'>
 			<form className='auth__form' onSubmit={handleSubmit}>

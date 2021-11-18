@@ -76,7 +76,6 @@ function App() {
 		setIsLoading(false);
 	}
 	function tokenCheck() {
-		console.log(path.pathname);
 		MainApi.getToken().then((res) => {
 			if (res.name) {
 				setLoggedIn(true);
@@ -143,7 +142,6 @@ function App() {
 	function handleLikeClick(like, movie) {
 		if (!like) {
 			MainApi.addMovie(movie).then((newCard) => {
-				console.log(newCard);
 				setFilteredMovies((state) =>
 					state.map((c) => {
 						if (c.id === movie.id) {
