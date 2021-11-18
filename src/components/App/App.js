@@ -135,7 +135,7 @@ function App() {
 		if (!localStorage.getItem('movies')) {
 			getMovies();
 		}
-		setTimeout(searchMovies, 1000, item, slider);
+		setTimeout(searchMovies, 1500, item, slider);
 	}
 	function handleSavedSearchClick(item, slider) {
 		searchSavedMovies(item, slider);
