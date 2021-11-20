@@ -141,6 +141,7 @@ function App() {
 			.then((res) => {
 				if (!res.message) {
 					tokenCheck();
+					getMyMovies();
 					history.push('/movies');
 				} else {
 					setAuthError(res.message);
@@ -158,6 +159,7 @@ function App() {
 				if (!res.message) {
 					console.log(res);
 					setLoggedIn(true);
+					getMyMovies();
 					history.push('/movies');
 				} else {
 					setAuthError(res.message);
