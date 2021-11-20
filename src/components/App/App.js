@@ -12,6 +12,7 @@ import React from 'react';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MoviesApi from '../../utils/MoviesApi';
+import { SHORTFILM_DURATION } from '../../utils/constants';
 
 function App() {
 	const path = useLocation();
@@ -19,13 +20,15 @@ function App() {
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [currentUser, setCurrentUser] = React.useState({});
 	const [loggedIn, setLoggedIn] = React.useState(false);
-	const [myMovies, setMyMovies] = React.useState({});
+	const [myMovies, setMyMovies] = React.useState([]);
 	const [filteredMovies, setFilteredMovies] = React.useState({});
 	const [authError, setAuthError] = React.useState('');
 	const [filteredSavedMovies, setFilteredSavedMovies] = React.useState({});
 	const [profileUpdateStatus, setProfileUpdateStatus] = React.useState(false);
 	const [noResults, setNoResults] = React.useState(false);
 	const [searchStatus, setSerchStatus] = React.useState(false);
+	const [checkbox, setCheckbox] = React.useState(false);
+	const [lastInput, setLastInput] = React.useState('');
 	React.useEffect(() => {
 		if (['/', '/movies', '/saved-movies', '/profile'].includes(path.pathname)) {
 			tokenCheck();
@@ -33,57 +36,81 @@ function App() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	React.useEffect(() => {
-		getMyMovies();
+		if (Object.keys(myMovies).length === 0) {
+			getMyMovies();
+		}
 		setFilteredSavedMovies({});
 		setAuthError('');
 		setSerchStatus(false);
 		setNoResults(false);
+		setLastInput('');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [path.pathname]);
+	React.useEffect(() => {
+		if (path.pathname === '/movies') {
+			searchMovies(lastInput, checkbox);
+		} else if (path.pathname === '/saved-movies') {
+			searchSavedMovies(lastInput, checkbox);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [checkbox]);
 	function searchMovies(input, slider) {
+		if (!input) return;
 		setIsLoading(true);
+		setLastInput(input);
 		const movies = JSON.parse(localStorage.getItem('movies'));
 		let values = Object.values(movies);
-		const longMovies = values.filter((item) => {
-			if (item.duration >= 40) {
+		const shortMovies = values.filter((item) => {
+			if (item.duration <= SHORTFILM_DURATION) {
 				return item;
 			} else return 0;
 		});
-		let movieList = slider ? values : longMovies;
+		let movieList = slider ? shortMovies : values;
 		const filtered = movieList.filter((item) => {
 			if (JSON.stringify(item).toLowerCase().indexOf(input.toLowerCase()) >= 0) {
 				return item;
 			} else return 0;
 		});
+
 		setFilteredMovies(filtered);
 		setNoResults(filtered.length === 0 ? true : false);
 		setIsLoading(false);
 	}
 	function searchSavedMovies(input, slider) {
+		if (Object.keys(myMovies).length === 0) return;
 		setIsLoading(true);
+		setLastInput(input);
 		setSerchStatus(true);
-		const longMovies = myMovies.filter((item) => {
-			if (item.duration >= 40) {
+		const shortMovies = myMovies.filter((item) => {
+			if (item.duration <= SHORTFILM_DURATION) {
 				return item;
 			} else return 0;
 		});
-		const savedMovieList = slider ? myMovies : longMovies;
+		const savedMovieList = slider ? shortMovies : myMovies;
 		const filtered = savedMovieList.filter((item) => {
 			if (JSON.stringify(item).toLowerCase().indexOf(input.toLowerCase()) >= 0) {
 				return item;
 			} else return 0;
 		});
+		console.log(filtered);
 		setFilteredSavedMovies(filtered);
 		setNoResults(filtered.length === 0 ? true : false);
 		setIsLoading(false);
 	}
 	function tokenCheck() {
-		MainApi.getToken().then((res) => {
-			if (res.name) {
-				setLoggedIn(true);
-				setCurrentUser(res);
-				history.push('/movies');
-			}
-		});
+		MainApi.getToken()
+			.then((res) => {
+				if (res.name) {
+					setLoggedIn(true);
+					setCurrentUser(res);
+					if (['/signin', '/signup'].includes(path.pathname)) {
+						history.push('/movies');
+					} else history.push(path.pathname);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 	function getMovies() {
 		setIsLoading(true);
@@ -91,7 +118,10 @@ function App() {
 			.then((res) => {
 				localStorage.setItem('movies', JSON.stringify(res));
 			})
-			.then(() => setIsLoading(false));
+			.then(() => setIsLoading(false))
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 	function getMyMovies() {
 		setIsLoading(true);
@@ -99,38 +129,66 @@ function App() {
 			.then((res) => {
 				setMyMovies(res);
 			})
-			.then(() => setIsLoading(false));
+			.then(() => setIsLoading(false))
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 	function handleLoginUpdate(data) {
-		MainApi.signIn(data).then((res) => {
-			if (!res.message) {
-				tokenCheck();
-				history.push('/movies');
-			} else {
-				setAuthError(res.message);
-			}
-		});
+		setIsLoading(true);
+		MainApi.signIn(data)
+			.then((res) => {
+				if (!res.message) {
+					tokenCheck();
+					history.push('/movies');
+				} else {
+					setAuthError(res.message);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+			.finally(() => setIsLoading(false));
 	}
 	function handleRegisterUpdate(data) {
-		MainApi.signUp(data).then((res) => {
-			if (!res.message) {
-				history.push('/signin');
-			} else {
-				setAuthError(res.message);
-			}
-		});
+		setIsLoading(true);
+		MainApi.signUp(data)
+			.then((res) => {
+				if (!res.message) {
+					console.log(res);
+					setLoggedIn(true);
+					history.push('/movies');
+				} else {
+					setAuthError(res.message);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+			.finally(() => setIsLoading(false));
 	}
 	function handleProfileUpdate(data) {
-		MainApi.patchProfile(data).then((res) => {
-			setCurrentUser(res);
-			setProfileUpdateStatus(true);
-		});
+		setIsLoading(true);
+		MainApi.patchProfile(data)
+			.then((res) => {
+				setCurrentUser(res);
+				setProfileUpdateStatus(true);
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+			.finally(() => setIsLoading(false));
 	}
 	function handleLogout() {
-		MainApi.logOut().then((res) => console.log(res));
+		MainApi.logOut()
+			.then((res) => console.log(res))
+			.catch((err) => {
+				console.log(err);
+			});
 		setLoggedIn(false);
 	}
 	function handleSearchClick(item, slider) {
+		console.log(slider);
 		setIsLoading(true);
 		if (!localStorage.getItem('movies')) {
 			getMovies();
@@ -142,37 +200,49 @@ function App() {
 	}
 	function handleLikeClick(like, movie) {
 		if (!like) {
-			MainApi.addMovie(movie).then((newCard) => {
-				setFilteredMovies((state) =>
-					state.map((c) => {
-						if (c.id === movie.id) {
-							c.id = newCard._id;
-							c.liked = true;
-							return c;
-						} else return c;
-					})
-				);
-			});
+			MainApi.addMovie(movie)
+				.then((newCard) => {
+					setFilteredMovies((state) =>
+						state.map((c) => {
+							if (c.id === movie.id) {
+								c.id = newCard._id;
+								c.liked = true;
+								return c;
+							} else return c;
+						})
+					);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		} else {
-			MainApi.deleteMovie(movie.id).then((res) => {
-				setFilteredMovies((state) =>
-					state.map((c) => {
-						if (c.id === movie.id) {
-							c.liked = false;
-							return c;
-						} else return c;
-					})
-				);
-			});
+			MainApi.deleteMovie(movie.id)
+				.then((res) => {
+					setFilteredMovies((state) =>
+						state.map((c) => {
+							if (c.id === movie.id) {
+								c.liked = false;
+								return c;
+							} else return c;
+						})
+					);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 	}
 	function handleRemoveClick(movie) {
-		MainApi.deleteMovie(movie._id).then((currentMovie) => {
-			setMyMovies((state) => state.filter((c) => (c._id === currentMovie._id ? null : c)));
-			if (Object.keys(filteredSavedMovies).length > 1) {
-				setFilteredSavedMovies((state) => state.filter((c) => (c._id === currentMovie._id ? null : c)));
-			}
-		});
+		MainApi.deleteMovie(movie._id)
+			.then((currentMovie) => {
+				setMyMovies((state) => state.filter((c) => (c._id === currentMovie._id ? null : c)));
+				if (Object.keys(filteredSavedMovies).length > 1) {
+					setFilteredSavedMovies((state) => state.filter((c) => (c._id === currentMovie._id ? null : c)));
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 	return (
@@ -184,10 +254,10 @@ function App() {
 						<Main />
 					</Route>
 					<Route path='/signup' exact>
-						<Register onUpdate={handleRegisterUpdate} authError={authError} />
+						<Register onUpdate={handleRegisterUpdate} authError={authError} isLoading={isLoading} />
 					</Route>
 					<Route path='/signin' exact>
-						<Login onUpdate={handleLoginUpdate} authError={authError} />
+						<Login onUpdate={handleLoginUpdate} authError={authError} isLoading={isLoading} />
 					</Route>
 					<ProtectedRoute
 						component={Profile}
@@ -196,6 +266,7 @@ function App() {
 						loggedIn={loggedIn}
 						onUpdate={handleProfileUpdate}
 						onLogout={handleLogout}
+						isLoading={isLoading}
 					/>
 					<ProtectedRoute
 						component={Movies}
@@ -213,6 +284,7 @@ function App() {
 						onSavedMoviesLoad={getMyMovies}
 						noResultsStatus={noResults}
 						searchStatus={searchStatus}
+						setCheckboxStatus={setCheckbox}
 					/>
 
 					<Route path='*' exact>

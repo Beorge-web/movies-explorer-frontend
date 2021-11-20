@@ -37,6 +37,7 @@ function Profile({ profileUpdateStatus, onLogout, ...props }) {
 						}}
 						minLength='3'
 						required
+						value={(values.name ? values.name : currentUser.name) || ''}
 					/>
 				</div>
 				<span className={errors.name === '' ? 'profile__input-error' : 'profile__input-error profile__input-error_active'}>{errors.name}</span>
@@ -53,10 +54,11 @@ function Profile({ profileUpdateStatus, onLogout, ...props }) {
 						}}
 						minLength='6'
 						required
+						value={(values.email ? values.email : currentUser.email) || ''}
 					/>
 				</div>
 				<span className={errors.email === '' ? 'profile__input-error' : 'profile__input-error profile__input-error_active'}>{errors.email}</span>
-				<button type='submit' className='profile__edit' disabled={isValid && !isDataRepeat ? false : true}>
+				<button type='submit' className='profile__edit' disabled={isValid && !isDataRepeat && !props.isLoading ? false : true}>
 					Редактировать
 				</button>
 				<button type='button' className='profile__logout' onClick={onLogout} to='/'>

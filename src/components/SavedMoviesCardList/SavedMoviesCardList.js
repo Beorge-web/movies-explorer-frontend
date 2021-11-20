@@ -1,6 +1,10 @@
 import MovieCard from '../MovieCard/MovieCard';
 import React from 'react';
-function SavedMoviesCardList({ filteredSavedMovies, myMovies, onLike, searchStatus, onRemove }) {
+import react from 'react';
+function SavedMoviesCardList({ filteredSavedMovies, myMovies, onLike, searchStatus, onRemove, onSavedMoviesLoad }) {
+	react.useEffect(() => {
+		onSavedMoviesLoad();
+	}, []);
 	const renderMovies = searchStatus ? filteredSavedMovies : myMovies;
 	return (
 		<div className='card-list root__section'>

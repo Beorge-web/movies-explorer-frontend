@@ -37,7 +37,7 @@ function Register(props) {
 					/>
 					<span className={errors.password === '' ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{errors.password}</span>
 				</div>
-				<button type='submit' className='auth__button' disabled={isValid ? false : true}>
+				<button type='submit' className='auth__button' disabled={isValid && !props.isLoading ? false : true}>
 					Зарегистрироваться
 				</button>
 				<span className={!props.authError ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{props.authError}</span>

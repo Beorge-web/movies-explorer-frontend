@@ -8,7 +8,7 @@ function SearchForm(props) {
 	const [sliderStatus, setSliderStatus] = React.useState(false);
 	React.useEffect(() => {
 		setSearchInput('');
-		console.log('???');
+		setSliderStatus(false);
 	}, [path.pathname]);
 	function handleSearchInput(event) {
 		setSearchInput(event.target.value);
@@ -18,7 +18,9 @@ function SearchForm(props) {
 		path.pathname === '/movies' ? props.onSearch(searchInput, sliderStatus) : props.onSavedSearch(searchInput, sliderStatus);
 	}
 	function handleSlider() {
-		setSliderStatus(!sliderStatus);
+		const slider = !sliderStatus;
+		setSliderStatus(slider);
+		props.setCheckboxStatus(slider);
 	}
 	return (
 		<div className='search root__section'>

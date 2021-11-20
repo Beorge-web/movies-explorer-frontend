@@ -21,11 +21,11 @@ function Login(props) {
 				</div>
 				<div className='auth__field'>
 					<label className='auth__label'>Пароль</label>
-					<input type='password' className='auth__input' name='password' onChange={handleChange} required minLength='8'  />
+					<input type='password' className='auth__input' name='password' onChange={handleChange} required minLength='8' />
 					<span className={errors.password === '' ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{errors.password}</span>
 				</div>
 
-				<button type='submit' className='auth__button' disabled={isValid ? false : true}>
+				<button type='submit' className='auth__button' disabled={isValid && !props.isLoading ? false : true}>
 					Войти
 				</button>
 				<span className={!props.authError ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{props.authError}</span>
