@@ -43,7 +43,6 @@ class Api {
 		}).then((res) => this._getResponseData(res));
 	}
 	deleteMovie(id) {
-		console.log(id);
 		return fetch(this._url + '/movies/' + id, {
 			method: 'DELETE',
 			headers: this._headers,
@@ -101,7 +100,6 @@ class Api {
 		return res.json();
 	}
 }
-
 const apiData = {
 	url: 'https://api.beorge-movies.nomoredomains.monster',
 	credentials: 'include',

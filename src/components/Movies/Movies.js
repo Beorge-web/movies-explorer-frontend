@@ -13,6 +13,9 @@ function Movies(props) {
 		setCurrentCards(currentCards + maxCards);
 	}
 	React.useEffect(() => {
+		setCurrentCards(0);
+	}, []);
+	React.useEffect(() => {
 		setCurrentCards(
 			window.innerWidth >= 1180
 				? DESKTOP_CARDS

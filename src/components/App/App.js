@@ -44,14 +44,15 @@ function App() {
 		setSerchStatus(false);
 		setNoResults(false);
 		setLastInput('');
+		setFilteredMovies({});
+		setCheckbox(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [path.pathname]);
+
 	React.useEffect(() => {
 		if (path.pathname === '/movies') {
 			searchMovies(lastInput, checkbox);
-		} else if (path.pathname === '/saved-movies') {
-			searchSavedMovies(lastInput, checkbox);
-		}
+		} else searchSavedMovies(lastInput, checkbox);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [checkbox]);
 	function searchMovies(input, slider) {
@@ -188,7 +189,6 @@ function App() {
 		setLoggedIn(false);
 	}
 	function handleSearchClick(item, slider) {
-		console.log(slider);
 		setIsLoading(true);
 		if (!localStorage.getItem('movies')) {
 			getMovies();
@@ -221,6 +221,7 @@ function App() {
 					setFilteredMovies((state) =>
 						state.map((c) => {
 							if (c.id === movie.id) {
+								console.log(c);
 								c.liked = false;
 								return c;
 							} else return c;
@@ -236,7 +237,7 @@ function App() {
 		MainApi.deleteMovie(movie._id)
 			.then((currentMovie) => {
 				setMyMovies((state) => state.filter((c) => (c._id === currentMovie._id ? null : c)));
-				if (Object.keys(filteredSavedMovies).length > 1) {
+				if (Object.keys(filteredSavedMovies).length >= 1) {
 					setFilteredSavedMovies((state) => state.filter((c) => (c._id === currentMovie._id ? null : c)));
 				}
 			})
