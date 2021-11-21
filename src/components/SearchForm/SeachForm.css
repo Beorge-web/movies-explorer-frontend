@@ -42,6 +42,9 @@
 .search__button:hover {
 	border: 1px solid white;
 }
+.search__button:disabled {
+	background-color: gray;
+}
 .search__options {
 	display: flex;
 	flex-direction: row;

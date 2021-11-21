@@ -45,6 +45,7 @@ function Movies(props) {
 					onSavedSearch={props.onSavedSearch}
 					noResultsStatus={props.noResultsStatus}
 					setCheckboxStatus={props.setCheckboxStatus}
+					isLoading={props.isLoading}
 				/>
 				{props.isLoading ? <Preloader /> : null}
 				<Route path='/movies' exact>

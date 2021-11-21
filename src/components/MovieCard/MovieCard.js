@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import likeActive from '../../images/active-like-icon.svg';
 import like from '../../images/like-icon.svg';
@@ -5,9 +6,11 @@ import removeCard from '../../images/remove-icon.svg';
 import { Switch, Route } from 'react-router-dom';
 function MovieCard({ movie, onLike, onRemove }) {
 	const [isCardLiked, setCardLiked] = React.useState(false);
+
 	React.useEffect(() => {
 		setCardLiked(movie.liked ? true : false);
 	}, [movie.liked]);
+	React.useEffect(() => {}, []);
 	let hours = 0;
 	let minutes = 0;
 	if (movie.duration >= 60) {
@@ -18,8 +21,9 @@ function MovieCard({ movie, onLike, onRemove }) {
 
 	function handleLikeClick() {
 		onLike(isCardLiked, movie);
+		setCardLiked(!isCardLiked);
 	}
-	const cardLikeSvg = isCardLiked && movie.liked === true ? likeActive : like;
+	const cardLikeSvg = isCardLiked ? likeActive : like;
 	function handleCardClick() {
 		window.open(movie.trailerLink, '_blank');
 	}

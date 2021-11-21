@@ -25,8 +25,15 @@ function SearchForm(props) {
 	return (
 		<div className='search root__section'>
 			<form className='search__form' onSubmit={handleSubmit}>
-				<input placeholder='Фильм' className='search__input' value={searchInput} onChange={handleSearchInput} required minLength='3'></input>
-				<button type='submit' className='search__button'>
+				<input
+					readOnly={props.isLoading ? true : false}
+					placeholder='Фильм'
+					className='search__input'
+					value={searchInput}
+					onChange={handleSearchInput}
+					required
+					minLength='3'></input>
+				<button type='submit' className='search__button' disabled={props.isLoading ? true : false}>
 					<img className='search__image' src={searchImg} alt='Поиск'></img>
 				</button>
 			</form>

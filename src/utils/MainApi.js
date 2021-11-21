@@ -79,7 +79,7 @@ class Api {
 			}),
 		}).then((res) => this._getResponseData(res));
 	}
-	logOut(data) {
+	logOut() {
 		return fetch(this._url + '/signout', {
 			method: 'POST',
 			headers: this._headers,
@@ -100,6 +100,7 @@ class Api {
 		return res.json();
 	}
 }
+
 const apiData = {
 	url: 'https://api.beorge-movies.nomoredomains.monster',
 	credentials: 'include',

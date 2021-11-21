@@ -38,6 +38,7 @@ function Profile({ profileUpdateStatus, onLogout, ...props }) {
 						minLength='3'
 						required
 						value={(values.name ? values.name : currentUser.name) || ''}
+						readOnly={props.isLoading ? true : false}
 					/>
 				</div>
 				<span className={errors.name === '' ? 'profile__input-error' : 'profile__input-error profile__input-error_active'}>{errors.name}</span>
@@ -55,6 +56,7 @@ function Profile({ profileUpdateStatus, onLogout, ...props }) {
 						minLength='6'
 						required
 						value={(values.email ? values.email : currentUser.email) || ''}
+						readOnly={props.isLoading ? true : false}
 					/>
 				</div>
 				<span className={errors.email === '' ? 'profile__input-error' : 'profile__input-error profile__input-error_active'}>{errors.email}</span>

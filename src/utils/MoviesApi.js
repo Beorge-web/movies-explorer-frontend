@@ -16,6 +16,7 @@ class Api {
 		return res.json();
 	}
 }
+
 const apiData = {
 	url: 'https://api.nomoreparties.co/beatfilm-movies',
 	headers: {

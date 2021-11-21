@@ -16,12 +16,30 @@ function Register(props) {
 			<form className='auth__form' onSubmit={handleSubmit}>
 				<div className='auth__field'>
 					<label className='auth__label'>Имя</label>
-					<input type='text' className='auth__input' name='name' value={values.name || ''} onChange={handleChange} required minLength='3' />
+					<input
+						type='text'
+						className='auth__input'
+						name='name'
+						value={values.name || ''}
+						onChange={handleChange}
+						disabled={props.isLoading ? true : false}
+						required
+						minLength='3'
+					/>
 					<span className={errors.name === '' ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{errors.name}</span>
 				</div>
 				<div className='auth__field'>
 					<label className='auth__label'>E-mail</label>
-					<input type='email' className='auth__input' name='email' value={values.email || ''} onChange={handleChange} minLength='4' required />
+					<input
+						type='email'
+						className='auth__input'
+						name='email'
+						value={values.email || ''}
+						onChange={handleChange}
+						readOnly={props.isLoading ? true : false}
+						minLength='4'
+						required
+					/>
 					<span className={errors.email === '' ? 'auth__input-error' : 'auth__input-error auth__input-error_active'}>{errors.email}</span>
 				</div>
 				<div className='auth__field'>
@@ -32,6 +50,7 @@ function Register(props) {
 						name='password'
 						value={values.password || ''}
 						onChange={handleChange}
+						readOnly={props.isLoading ? true : false}
 						minLength='8'
 						required
 					/>
