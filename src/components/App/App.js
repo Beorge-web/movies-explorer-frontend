@@ -183,7 +183,10 @@ function App() {
 	}
 	function handleLogout() {
 		MainApi.logOut()
-			.then((res) => console.log(res))
+			.then((res) => {
+				console.log(res);
+				localStorage.removeItem('movies');
+			})
 			.catch((err) => {
 				console.log(err);
 			});
