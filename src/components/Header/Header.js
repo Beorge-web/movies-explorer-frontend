@@ -24,6 +24,7 @@ function Header() {
 	function handleLinkClick() {
 		setMobileMenuOpen(false);
 	}
+
 	return (
 		<Switch>
 			<Route exact path='/'>
@@ -58,14 +59,17 @@ function Header() {
 							onClick={handleCloseClick}></button>
 						<nav className='header__nav'>
 							<div className='header_nav-movies'>
-								<Link to='/' className={isMobileMenuOpen ? 'header__link' : 'header__link header__link_hidden'} onClick={handleLinkClick}>
+								<Link
+									to='/'
+									className={isMobileMenuOpen && mobileMode ? 'header__link' : 'header__link header__link_hidden'}
+									onClick={handleLinkClick}>
 									Главная
 								</Link>
 
 								<NavLink exact to='/movies' className='header__link' activeClassName='header__link_selected' onClick={handleLinkClick}>
 									Фильмы
 								</NavLink>
-								<NavLink exact to='/saved-movies' className='header__link' activeClassName='header__link_selected' onClick={handleLinkClick}>
+								<NavLink exact to='/saved-movies' className='header__link' onClick={handleLinkClick} activeClassName='header__link_selected'>
 									Сохраненные фильмы
 								</NavLink>
 							</div>

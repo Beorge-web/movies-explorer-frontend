@@ -1,7 +1,7 @@
 @import url(./components/App/App.css);
 @import url(./components/AboutMe/AboutMe.css);
 @import url(./components/AboutProject/AboutProject.css);
-
+@import url(../qr.css);
 @import url(./components/Footer/Footer.css);
 
 @import url(./components/Header/Header.css);
@@ -17,3 +17,4 @@
 @import url(./components/Register/Register.css);
 @import url(./components/SearchForm/SeachForm.css);
 @import url(./components/Techs/Tech.css);
+
