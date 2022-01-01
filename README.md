@@ -21,7 +21,7 @@ Single Page Application c описанием создания проекта и 
 2. Установите NPM пакеты:
 `npm install`
 3. Запуск проекта:
-`npm run start`
+`npm run dev`
 
 ## Ссылка на проект
 https://beorge-movies.nomoredomains.monster/
