@@ -99,7 +99,6 @@ function App() {
 		MainApi.getToken()
 			.then((res) => {
 				if (res.name) {
-					console.log(res);
 					setLoggedIn(true);
 					setCurrentUser({ name: res.name, email: res.email });
 					if (['/signin', '/signup'].includes(path.pathname)) {
@@ -138,12 +137,12 @@ function App() {
 		setIsLoading(true);
 		MainApi.signIn(data)
 			.then((res) => {
-				if (!res.message) {
+				if (res.message) {
+					setAuthError(res.message);
+				} else {
 					tokenCheck();
 					getMyMovies();
 					history.push('/movies');
-				} else {
-					setAuthError(res.message);
 				}
 			})
 			.catch((err) => {
@@ -184,7 +183,6 @@ function App() {
 	function handleLogout() {
 		MainApi.logOut()
 			.then((res) => {
-				console.log(res);
 				localStorage.removeItem('movies');
 			})
 			.catch((err) => {
@@ -233,7 +231,6 @@ function App() {
 					setFilteredMovies((state) =>
 						state.map((c) => {
 							if (c.id === movie.id) {
-								console.log(c);
 								c.liked = false;
 								return c;
 							} else return c;

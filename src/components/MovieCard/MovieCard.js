@@ -6,7 +6,6 @@ import removeCard from '../../images/remove-icon.svg';
 import { Switch, Route } from 'react-router-dom';
 function MovieCard({ movie, onLike, onRemove }) {
 	const [isCardLiked, setCardLiked] = React.useState(false);
-	console.log(movie);
 	React.useEffect(() => {
 		setCardLiked(movie.liked ? true : false);
 	}, [movie.liked]);
