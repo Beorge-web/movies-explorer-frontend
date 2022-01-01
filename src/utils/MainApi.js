@@ -49,13 +49,7 @@ class Api {
 			credentials: this._credentials,
 		}).then((res) => this._getResponseData(res));
 	}
-	_rendering(button, isLoading) {
-		if (isLoading === true) {
-			button.textContent = 'Сохранение...';
-		} else {
-			button.textContent = 'Сохранить';
-		}
-	}
+
 	signUp(data) {
 		return fetch(this._url + '/signup', {
 			method: 'POST',
@@ -102,11 +96,18 @@ class Api {
 }
 
 const apiData = {
-	url: 'https://api.beorge-movies.nomoredomains.monster',
+	url: window.location.origin === 'http://localhost:3000' ? 'http://localhost:4000' : 'https://api.beorge-movies.nomoredomains.monster',
 	credentials: 'include',
 	headers: {
 		'Content-Type': 'application/json',
 	},
 };
+// const apiData = {
+// 	url: 'https://api.beorge-movies.nomoredomains.monster',
+// 	credentials: 'include',
+// 	headers: {
+// 		'Content-Type': 'application/json',
+// 	},
+// };
 const MainApi = new Api(apiData);
 export default MainApi;

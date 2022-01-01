@@ -23,5 +23,7 @@ Single Page Application c описанием создания проекта и 
 3. Запуск проекта:
 `npm run start`
 
+(Для корректной работы необходим запуск backend'а - https://github.com/Beorge-web/movies-explorer-api)
+
 ## Ссылка на проект
 https://beorge-movies.nomoredomains.monster/
