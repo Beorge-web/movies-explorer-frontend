@@ -10,7 +10,6 @@ Single Page Application c описанием создания проекта и 
 - CSS (Flex, Grid Layout)
 - БЭМ (Nested)
 - React JS
-- BEM
 - REST api
 
 
