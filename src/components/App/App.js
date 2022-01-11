@@ -36,6 +36,7 @@ function App() {
 		if (localStorage.getItem('movies')) {
 			setMovies(JSON.parse(localStorage.getItem('movies')));
 		}
+		document.title = 'Movies explorer';
 		getMyMovies();
 	}, []);
 	React.useEffect(() => {
